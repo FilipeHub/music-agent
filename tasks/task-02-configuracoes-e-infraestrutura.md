@@ -1,5 +1,6 @@
 # Task 02 — Configurações externalizadas e infraestrutura
 
+**Status:** ✅ Concluída (2026-11-05)
 **Dependências:** Task 01
 **Referência na especificação:** Seção 3.2, Seção 5.1, Seção 8 (`config/`), Seção 9 itens 1 e 4
 
@@ -27,13 +28,13 @@ retry, sufixo instrumental) em `application.yml`, configurar o Jackson e habilit
 6. Log de startup (ex.: `ApplicationRunner`) imprimindo um resumo das propriedades carregadas.
 
 ## Critérios de aceite
-- [ ] Alterar um valor no `application.yml` (ex.: `batchCooldownMs`) reflete no log de startup.
-- [ ] Propriedade obrigatória ausente/inválida (ex.: `jitterMinMs > jitterMaxMs` ou `cdpUrl` vazio) impede o startup com mensagem clara.
-- [ ] Nenhum seletor ou URL fica hardcoded em classes Java.
+- [x] Alterar um valor no `application.yml` (ex.: `batchCooldownMs`) reflete no log de startup.
+- [x] Propriedade obrigatória ausente/inválida (ex.: `jitterMinMs > jitterMaxMs` ou `cdpUrl` vazio) impede o startup com mensagem clara.
+- [x] Nenhum seletor ou URL fica hardcoded em classes Java.
 
 ## Resultado observável
 ```bash
-./mvnw spring-boot:run
+SERVER_PORT=8081 ./mvnw spring-boot:run
 # Log esperado:
 # Automation config -> cdpUrl=http://localhost:9222, flowMusicUrl=..., jitter=4000-9000ms,
 #                      cooldown=15000ms, retry=3x, defaultTargetCount=30, virtualThreads=true
@@ -42,3 +43,23 @@ retry, sufixo instrumental) em `application.yml`, configurar o Jackson e habilit
 ## Testes
 Nenhum (classes de configuração são triviais segundo a Seção 7).
 
+## Evidências (2026-11-05)
+```text
+1) Perfil padrão:
+Automation config -> cdpUrl=http://localhost:9222, flowMusicUrl=https://labs.google/fx/tools/music-fx, jitter=4000-9000ms, cooldown=15000ms, retry=3x (backoff=2s), defaultTargetCount=30, minFileSize=10240B, virtualThreads=true
+
+2) Perfil simulation (--spring.profiles.active=simulation):
+Automation config -> cdpUrl=http://localhost:9222, flowMusicUrl=https://labs.google/fx/tools/music-fx, jitter=100-300ms, cooldown=1000ms, retry=3x (backoff=1s), defaultTargetCount=30, minFileSize=10240B, virtualThreads=true
+
+3) Validação jitterMinMs > jitterMaxMs:
+Binding to target com.automation.flowmusic.config.AutomationProperties failed:
+    Property: automation.timing.validJitterRange
+    Value: "false"
+    Reason: jitterMinMs must be less than or equal to jitterMaxMs
+
+4) Validação cdpUrl em branco:
+Binding to target com.automation.flowmusic.config.AutomationProperties failed:
+    Property: automation.browser.cdpUrl
+    Value: ""
+    Reason: cdpUrl must not be blank
+```

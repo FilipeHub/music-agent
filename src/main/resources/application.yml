@@ -5,3 +5,33 @@ server:
 spring:
   application:
     name: flow-music-automation
+  threads:
+    virtual:
+      enabled: true
+
+automation:
+  browser:
+    cdp-url: ${CDP_URL:http://localhost:9222}
+    flow-music-url: ${FLOW_MUSIC_URL:https://labs.google/fx/tools/music-fx}
+    navigation-timeout-ms: 30000
+  selectors:
+    prompt-input: "textarea[aria-label*='prompt' i], textarea"
+    generate-button: "button[aria-label*='Generate' i], button:has-text('Generate')"
+    audio-card: "[data-testid='audio-card'], .audio-track-card"
+    download-button: "button[aria-label*='Download' i], a[download]"
+    loading-indicator: "[role='progressbar'], .loading-spinner"
+  timing:
+    jitter-min-ms: 4000
+    jitter-max-ms: 9000
+    batch-cooldown-ms: 15000
+    generation-timeout-ms: 120000
+  retry:
+    max-attempts: 3
+    backoff-base-seconds: 2
+  generation:
+    default-target-count: 30
+    instrumental-suffix: ", strictly instrumental, no vocals, no lyrics, no singing, high quality studio audio"
+    max-prompt-length: 1000
+  download:
+    min-file-size-bytes: 10240
+    file-wait-timeout-ms: 60000

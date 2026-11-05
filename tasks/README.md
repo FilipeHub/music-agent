@@ -9,7 +9,7 @@ exceção é a Task 09, que depende apenas da Task 02 e pode ser feita em parale
 | # | Task | Status | Resultado observável | Testes |
 | :-- | :--- | :--- | :--- | :--- |
 | 01 | [Configuração inicial do projeto](task-01-configuracao-inicial.md) | ✅ Concluída | App Spring Boot sobe na porta 8080 e `mvn verify` passa | — |
-| 02 | [Configurações externalizadas e infraestrutura](task-02-configuracoes-e-infraestrutura.md) | ⏳ Pendente | Log de startup exibe propriedades carregadas e virtual threads ativas | — |
+| 02 | [Configurações externalizadas e infraestrutura](task-02-configuracoes-e-infraestrutura.md) | ✅ Concluída | Log de startup exibe propriedades carregadas e virtual threads ativas | — |
 | 03 | [Serviço de diretório de Downloads do SO](task-03-os-download-directory-service.md) | ⏳ Pendente | Teste verde + caminho de Downloads logado no startup | `OsDownloadDirectoryServiceTest` |
 | 04 | [Leitor do `default.json` (1 ou N objetos)](task-04-default-input-loader.md) | ⏳ Pendente | Teste verde + log "N objetos carregados do default.json" | `DefaultInputLoaderServiceTest` |
 | 05 | [Motor de variação de prompts instrumentais](task-05-prompt-variation-service.md) | ⏳ Pendente | Teste verde gerando 30 prompts distintos e com travas | `PromptVariationServiceTest` |

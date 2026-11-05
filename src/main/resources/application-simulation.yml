@@ -1,0 +1,10 @@
+automation:
+  timing:
+    jitter-min-ms: 100
+    jitter-max-ms: 300
+    batch-cooldown-ms: 1000
+    generation-timeout-ms: 10000
+  retry:
+    max-attempts: 3
+    backoff-base-seconds: 1
+
