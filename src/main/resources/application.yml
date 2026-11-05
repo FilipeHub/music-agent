@@ -1,0 +1,7 @@
+server:
+  # Padrão 8080 (especificação). Sobrescreva com SERVER_PORT caso a porta esteja ocupada.
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: flow-music-automation
